@@ -19,12 +19,12 @@ asciiInput = sys.stdin.read()
 
 lines = asciiInput.splitlines()
 
-fontPath = os.path.join(os.path.dirname(__file__), "Anonymous.ttf")
+fontPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "Anonymous.ttf")
 font = ImageFont.truetype(fontPath, fontSize)
 
 char_width = font.getlength("A")
 ascent, descent = font.getmetrics()
-lineHeight = (ascent + descent) + 10
+lineHeight = (ascent + descent)
 
 imgWidth = int(char_width * max(len(line) for line in lines))
 imgHeight = lineHeight * len(lines)
