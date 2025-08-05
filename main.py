@@ -4,6 +4,32 @@ from PIL import Image, ImageDraw, ImageFont
 import sys
 import os
 
+def helpText():
+	return """
+	pipe some stdin into this program and it outputs an image.
+	Example:
+	$ cat ./asciiCat | ./main.py
+
+	-o	defines output file and type
+		Example:
+			$cat ./asciiCat | ./main.py -o "catImage.jpg"
+
+	-s	defines font size / resolution. Higher fontsize results in a higher res image
+		Example:
+			$cat ./asciiCat | ./main.py -s 34
+
+	-fc	defines font color. Use color words or hexcodes
+		Example:
+			$cat ./asciiCat | ./main.py -fc "#f0a54a"
+
+	-bc	defines background color. Use color words or hexcodes
+		Example:
+			$cat ./asciiCat | ./main.py -bc "#000000"
+
+	-h / --help
+		shows this help page
+	"""
+
 args = sys.argv
 
 outputFile="output.png"
@@ -20,6 +46,9 @@ for i in range(len(args)):
 		fontColor = str(args[i + 1])
 	elif args[i] == "-bc" and i+1 < len(args):
 		backgroundColor = str(args[i + 1])
+	elif args[i] == "--help" or args[i] == "-h":
+		print(helpText())
+		sys.exit(1)
 
 asciiInput = sys.stdin.read()
 
